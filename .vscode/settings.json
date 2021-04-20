@@ -1,0 +1,20 @@
+{
+    "C_Cpp.default.browse.path": ["${workspaceFolder}"],
+    "C_Cpp.default.defines": [
+        "APP_TIMER_V2",
+        "APP_TIMER_V2_RTC1_ENABLED",
+        "BLE_STACK_SUPPORT_REQD",
+        "BOARD_PCA10056",
+        "CONFIG_GPIO_AS_PINRESET",
+        "FLOAT_ABI_HARD",
+        "NRF52840_XXAA",
+        "NRF_CRYPTO_MAX_INSTANCE_COUNT=1",
+        "NRF_SD_BLE_API_VERSION=7",
+        "S140",
+        "SOFTDEVICE_PRESENT"
+    ],
+    "C_Cpp.default.compilerPath": "${env:GCC_ARM}/arm-none-eabi-gcc.exe",
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-arm"
+}
