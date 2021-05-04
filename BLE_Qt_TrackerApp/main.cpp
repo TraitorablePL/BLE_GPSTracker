@@ -1,34 +1,22 @@
-#include "markermodel.h"
-
-#include <QApplication>
-#include <QQuickWidget>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQuickItem>
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QQuickWidget w;
-    MarkerModel model;
-    w.rootContext()->setContextProperty("markerModel", &model);
-    w.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
-    w.show();
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication application(argc, argv);
 
-    return a.exec();
+    QQmlApplicationEngine engine;
+
+    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    QObject::connect(&engine, SIGNAL(quit()), qApp, SLOT(quit()));
+
+    QObject *item = engine.rootObjects().first();
+    Q_ASSERT(item);
+
+    QMetaObject::invokeMethod(item, "createMap");
+
+    return application.exec();
 }
-
-//#include <QGuiApplication>
-//#include <QQmlApplicationEngine>
-
-//#include "backend.h"
-
-//int main(int argc, char *argv[])
-//{
-//    QGuiApplication app(argc, argv);
-
-//    qmlRegisterType<BackEnd>("io.qt.examples.backend", 1, 0, "BackEnd");
-
-//    QQmlApplicationEngine engine;
-//    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-
-//    return app.exec();
-//}

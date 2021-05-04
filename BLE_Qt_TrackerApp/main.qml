@@ -1,77 +1,85 @@
-import QtQuick 2.0
+import QtQuick 2.5
+import QtQuick.Controls 1.4
 import QtLocation 5.6
-import QtPositioning 5.6
-import QtQuick.Window 2.0
+import QtPositioning 5.5
 
-Rectangle {
-    width: Screen.width
-    height: Screen.height
-    visible: true
+ApplicationWindow {
+    id: appWindow
+    property variant map
+    property variant minimap
+    property variant parameters
 
-    Plugin {
-        id: mapPlugin
-        name: "osm"
+    function createMap()
+    {
+        var plugin
+
+        if (parameters && parameters.length>0)
+            plugin = Qt.createQmlObject ('import QtLocation 5.6; Plugin{ name:"osm"; parameters: appWindow.parameters}', appWindow)
+        else
+            plugin = Qt.createQmlObject ('import QtLocation 5.6; Plugin{ name:"osm"}', appWindow)
+
+        if (minimap) {
+            minimap.destroy()
+            minimap = null
+        }
+
+        var zoomLevel = null
+        var tilt = null
+        var bearing = null
+        var fov = null
+        var center = null
+        var panelExpanded = null
+        if (map) {
+            zoomLevel = map.zoomLevel
+            tilt = map.tilt
+            bearing = map.bearing
+            fov = map.fieldOfView
+            center = map.center
+//            panelExpanded = map.slidersExpanded
+            map.destroy()
+        }
+
+        map = mapComponent.createObject(page);
+        map.plugin = plugin;
+
+        if (zoomLevel != null) {
+            map.tilt = tilt
+            map.bearing = bearing
+            map.fieldOfView = fov
+            map.zoomLevel = zoomLevel
+            map.center = center
+//            map.slidersExpanded = panelExpanded
+        } else {
+            // Use an integer ZL to enable nearest interpolation, if possible.
+            map.zoomLevel = Math.floor((map.maximumZoomLevel - map.minimumZoomLevel)/2)
+            // defaulting to 45 degrees, if possible.
+            map.fieldOfView = Math.min(Math.max(45.0, map.minimumFieldOfView), map.maximumFieldOfView)
+        }
+
+        map.forceActiveFocus()
     }
 
-    Map {
-        id: mapview
-        anchors.fill: parent
-        plugin: mapPlugin
-        center: QtPositioning.coordinate(50.0647, 19.9450)
-        zoomLevel: 14
+    title: qsTr("GPS Tracker App")
+    height: 800
+    width: 800
+    visible: true
 
-        MapItemView{
-            model: markerModel
-            delegate: mapcomponent
+    //Container for AppWindow
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        focus: true
+
+        initialItem: Item {
+            id: page
         }
     }
 
     Component {
-        id: mapcomponent
-        MapQuickItem {
-            id: marker
-            anchorPoint.x: image.width/4
-            anchorPoint.y: image.height
-            coordinate: position
+        id: mapComponent
 
-            sourceItem: Image {
-                id: image
-                source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
-            }
-        }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.RightButton
-
-        onPressAndHold:  {
-            var coordinate = mapview.toCoordinate(Qt.point(mouse.x,mouse.y))
-            markerModel.addMarker(coordinate)
+        MapComponent{
+            anchors.fill: parent
         }
     }
 }
-
-
-//import QtQuick 2.6
-//import QtQuick.Controls 2.0
-//import io.qt.examples.backend 1.0
-
-//ApplicationWindow {
-//    id: root
-//    width: 300
-//    height: 480
-//    visible: true
-
-//    BackEnd {
-//        id: backend
-//    }
-
-//    TextField {
-//        text: backend.userName
-//        placeholderText: qsTr("User name")
-//        anchors.centerIn: parent
-
-//        onTextChanged: backend.userName = text
-//    }
-//}
