@@ -11619,6 +11619,7 @@
 #define BLE_HRS_BLE_OBSERVER_PRIO 2
 #endif
 
+
 // <o> BLE_HRS_C_BLE_OBSERVER_PRIO  
 // <i> Priority with which BLE events are dispatched to the Heart Rate Service Client.
 
@@ -11895,6 +11896,13 @@
 // <o> PM_BLE_OBSERVER_PRIO - Priority with which BLE events are dispatched to the Peer Manager module. 
 #ifndef PM_BLE_OBSERVER_PRIO
 #define PM_BLE_OBSERVER_PRIO 1
+#endif
+
+// <o> CONTROL_SERVICE_OBSERVER_PRIO  
+// <i> Priority with which BLE events are dispatched to the Control Service
+
+#ifndef CONTROL_SERVICE_OBSERVER_PRIO
+#define CONTROL_SERVICE_OBSERVER_PRIO 2
 #endif
 
 // </h> 

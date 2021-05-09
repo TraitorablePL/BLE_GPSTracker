@@ -25,6 +25,7 @@
 #include "nrf_ble_qwr.h"
 #include "ble_conn_state.h"
 #include "nrf_pwr_mgmt.h"
+#include "include/control_service.h"
 
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
@@ -67,7 +68,7 @@
 
 #define DEAD_BEEF                           0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
-//BLE_BAS_DEF(m_bas);                                                 /**< Structure used to identify the battery service. */
+CONTROL_SERVICE_DEF(m_control_service);                             /**< Structure used to identify the control service. */
 NRF_BLE_GATT_DEF(m_gatt);                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                             /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);                                 /**< Advertising module instance. */
@@ -261,6 +262,10 @@ static void services_init(void) {
 
     err_code = ble_dis_init(&dis_init);
     APP_ERROR_CHECK(err_code);
+
+    err_code = control_service_init(&m_control_service);
+    APP_ERROR_CHECK(err_code);
+    
 }
 
 /**@brief Function for starting application timers.

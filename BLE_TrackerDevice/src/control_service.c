@@ -1,11 +1,11 @@
 #include "sdk_common.h"
-#include "include/control_service.h"
+#include "control_service.h"
 #include <string.h>
 #include "ble_srv_common.h"
 #include "ble_conn_state.h"
 
 #include "nrf_log.h"
-NRF_LOG_MODULE_REGISTER();
+//NRF_LOG_MODULE_REGISTER();
 
 /**@brief Function for handling the Write event.
  *
@@ -48,7 +48,8 @@ static ret_code_t reset_char_add(control_service_t * p_control_service) {
     uint8_t                 reset_value;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = BLE_UUID_BATTERY_LEVEL_CHAR;
+    add_char_params.uuid                = RESET_CHARACTERISTC;
+    add_char_params.uuid_type           = p_control_service->uuid_type;
     add_char_params.max_len             = sizeof(uint8_t);
     add_char_params.init_len            = sizeof(uint8_t);
     add_char_params.p_init_value        = &reset_value;
@@ -73,7 +74,8 @@ static ret_code_t record_char_add(control_service_t * p_control_service) {
     uint8_t                 record_value = 0;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = BLE_UUID_BATTERY_LEVEL_CHAR;
+    add_char_params.uuid                = RECORD_CHARACTERISTC;
+    add_char_params.uuid_type           = p_control_service->uuid_type;
     add_char_params.max_len             = sizeof(uint8_t);
     add_char_params.init_len            = sizeof(uint8_t);
     add_char_params.p_init_value        = &record_value;
@@ -98,7 +100,8 @@ static ret_code_t download_char_add(control_service_t * p_control_service) {
     uint8_t                 download_value = 0;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = BLE_UUID_BATTERY_LEVEL_CHAR;
+    add_char_params.uuid                = DOWNLOAD_CHARACTERISTC;
+    add_char_params.uuid_type           = p_control_service->uuid_type;
     add_char_params.max_len             = sizeof(uint8_t);
     add_char_params.init_len            = sizeof(uint8_t);
     add_char_params.p_init_value        = &download_value;
@@ -109,7 +112,7 @@ static ret_code_t download_char_add(control_service_t * p_control_service) {
 
     err_code = characteristic_add(p_control_service->service_handle,
                                   &add_char_params,
-                                  &(p_control_service->reset_handles));
+                                  &(p_control_service->download_handles));
     if (err_code != NRF_SUCCESS){
         return err_code;
     }
@@ -125,11 +128,13 @@ ret_code_t control_service_init(control_service_t* p_control_service) {
     ret_code_t err_code;
     ble_uuid_t ble_uuid;
 
-    ble_uuid128_t base_uuid = {CONTROL_SERVICE_BASE_UUID};
+    ble_uuid128_t base_uuid = CONTROL_SERVICE_BASE_UUID;
     sd_ble_uuid_vs_add(&base_uuid, &p_control_service->uuid_type);
 
     ble_uuid.type = p_control_service->uuid_type;
     ble_uuid.uuid = CONTROL_SERVICE;
+
+    NRF_LOG_INFO("Control service ");
 
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_control_service->service_handle);
     VERIFY_SUCCESS(err_code);
