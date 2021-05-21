@@ -55,7 +55,7 @@ static ret_code_t reset_char_add(control_service_t * p_control_service) {
     add_char_params.uuid_type               = p_control_service->uuid_type;
     add_char_params.max_len                 = sizeof(bool);
     add_char_params.init_len                = sizeof(bool);
-    add_char_params.p_init_value            = &reset_value;
+    add_char_params.p_init_value            = (uint8_t*)&reset_value;
     add_char_params.char_props.read         = 1;
     add_char_params.char_props.write        = 1;
     add_char_params.read_access             = SEC_OPEN;
@@ -85,7 +85,7 @@ static ret_code_t record_char_add(control_service_t * p_control_service) {
     add_char_params.uuid_type               = p_control_service->uuid_type;
     add_char_params.max_len                 = sizeof(bool);
     add_char_params.init_len                = sizeof(bool);
-    add_char_params.p_init_value            = &record_value;
+    add_char_params.p_init_value            = (uint8_t*)&record_value;
     add_char_params.char_props.read         = 1;
     add_char_params.char_props.write        = 1;
     add_char_params.read_access             = SEC_OPEN;
@@ -115,7 +115,7 @@ static ret_code_t download_char_add(control_service_t * p_control_service) {
     add_char_params.uuid_type               = p_control_service->uuid_type;
     add_char_params.max_len                 = sizeof(bool);
     add_char_params.init_len                = sizeof(bool);
-    add_char_params.p_init_value            = &download_value;
+    add_char_params.p_init_value            = (uint8_t*)&download_value;
     add_char_params.char_props.read         = 1;
     add_char_params.char_props.write        = 1;
     add_char_params.read_access             = SEC_OPEN;
