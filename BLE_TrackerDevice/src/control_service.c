@@ -9,8 +9,8 @@
 
 /**@brief Function for handling the Write event.
  *
- * @param[in]   p_bas       Battery Service structure.
- * @param[in]   p_ble_evt   Event received from the BLE stack.
+ * @param[in]   p_control_service       Control Service structure.
+ * @param[in]   p_ble_evt               Event received from the BLE stack.
  */
 static void on_write(control_service_t * p_control_service, ble_evt_t const * p_ble_evt) {
 
@@ -18,7 +18,7 @@ static void on_write(control_service_t * p_control_service, ble_evt_t const * p_
 
     // Normal write on characteristic
     if (p_evt_write->handle == p_control_service->download_handles.value_handle) {
-        //Check what value is set and perform proper job
+        //TODO Check what value is set and perform proper job
     }
 }
 
