@@ -45,18 +45,22 @@ static ret_code_t reset_char_add(control_service_t * p_control_service) {
     ret_code_t              err_code;
     ble_add_char_params_t   add_char_params;
     ble_add_descr_params_t  add_descr_params;
-    uint8_t                 reset_value;
+    ble_gatts_char_pf_t     char_pf = {
+        .format = BLE_GATT_CPF_FORMAT_BOOLEAN
+    };
+    bool reset_value = false;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = RESET_CHARACTERISTC;
-    add_char_params.uuid_type           = p_control_service->uuid_type;
-    add_char_params.max_len             = sizeof(uint8_t);
-    add_char_params.init_len            = sizeof(uint8_t);
-    add_char_params.p_init_value        = &reset_value;
-    add_char_params.char_props.read     = 1;
-    add_char_params.char_props.write    = 1;
-    add_char_params.read_access         = SEC_OPEN;
-    add_char_params.write_access        = SEC_OPEN;
+    add_char_params.uuid                    = RESET_CHARACTERISTC;
+    add_char_params.uuid_type               = p_control_service->uuid_type;
+    add_char_params.max_len                 = sizeof(bool);
+    add_char_params.init_len                = sizeof(bool);
+    add_char_params.p_init_value            = &reset_value;
+    add_char_params.char_props.read         = 1;
+    add_char_params.char_props.write        = 1;
+    add_char_params.read_access             = SEC_OPEN;
+    add_char_params.write_access            = SEC_OPEN;
+    add_char_params.p_presentation_format   = &char_pf;
 
     err_code = characteristic_add(p_control_service->service_handle,
                                   &add_char_params,
@@ -71,18 +75,22 @@ static ret_code_t record_char_add(control_service_t * p_control_service) {
     ret_code_t              err_code;
     ble_add_char_params_t   add_char_params;
     ble_add_descr_params_t  add_descr_params;
-    uint8_t                 record_value = 0;
+    ble_gatts_char_pf_t     char_pf = {
+        .format = BLE_GATT_CPF_FORMAT_BOOLEAN
+    };
+    bool record_value = false;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = RECORD_CHARACTERISTC;
-    add_char_params.uuid_type           = p_control_service->uuid_type;
-    add_char_params.max_len             = sizeof(uint8_t);
-    add_char_params.init_len            = sizeof(uint8_t);
-    add_char_params.p_init_value        = &record_value;
-    add_char_params.char_props.read     = 1;
-    add_char_params.char_props.write    = 1;
-    add_char_params.read_access         = SEC_OPEN;
-    add_char_params.write_access        = SEC_OPEN;
+    add_char_params.uuid                    = RECORD_CHARACTERISTC;
+    add_char_params.uuid_type               = p_control_service->uuid_type;
+    add_char_params.max_len                 = sizeof(bool);
+    add_char_params.init_len                = sizeof(bool);
+    add_char_params.p_init_value            = &record_value;
+    add_char_params.char_props.read         = 1;
+    add_char_params.char_props.write        = 1;
+    add_char_params.read_access             = SEC_OPEN;
+    add_char_params.write_access            = SEC_OPEN;
+    add_char_params.p_presentation_format   = &char_pf;
 
     err_code = characteristic_add(p_control_service->service_handle,
                                   &add_char_params,
@@ -97,18 +105,22 @@ static ret_code_t download_char_add(control_service_t * p_control_service) {
     ret_code_t              err_code;
     ble_add_char_params_t   add_char_params;
     ble_add_descr_params_t  add_descr_params;
-    uint8_t                 download_value = 0;
+    ble_gatts_char_pf_t     char_pf = {
+        .format = BLE_GATT_CPF_FORMAT_BOOLEAN
+    };
+    bool download_value = false;
 
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                = DOWNLOAD_CHARACTERISTC;
-    add_char_params.uuid_type           = p_control_service->uuid_type;
-    add_char_params.max_len             = sizeof(uint8_t);
-    add_char_params.init_len            = sizeof(uint8_t);
-    add_char_params.p_init_value        = &download_value;
-    add_char_params.char_props.read     = 1;
-    add_char_params.char_props.write    = 1;
-    add_char_params.read_access         = SEC_OPEN;
-    add_char_params.write_access        = SEC_OPEN;
+    add_char_params.uuid                    = DOWNLOAD_CHARACTERISTC;
+    add_char_params.uuid_type               = p_control_service->uuid_type;
+    add_char_params.max_len                 = sizeof(bool);
+    add_char_params.init_len                = sizeof(bool);
+    add_char_params.p_init_value            = &download_value;
+    add_char_params.char_props.read         = 1;
+    add_char_params.char_props.write        = 1;
+    add_char_params.read_access             = SEC_OPEN;
+    add_char_params.write_access            = SEC_OPEN;
+    add_char_params.p_presentation_format   = &char_pf;
 
     err_code = characteristic_add(p_control_service->service_handle,
                                   &add_char_params,
