@@ -7,7 +7,9 @@ $(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
 
 # Source files common to all targets
 SRC_FILES += \
+  main.c \
   src/control_service.c \
+  src/data_service.c \
   modules/nrfx/mdk/gcc_startup_nrf52840.S \
   components/libraries/bsp/bsp.c \
   components/libraries/bsp/bsp_btn_ble.c \
@@ -75,7 +77,6 @@ SRC_FILES += \
   components/libraries/crypto/nrf_crypto_init.c \
   components/libraries/crypto/nrf_crypto_rng.c \
   components/libraries/crypto/nrf_crypto_shared.c \
-  main.c \
   components/softdevice/common/nrf_sdh.c \
   components/softdevice/common/nrf_sdh_ble.c \
   components/softdevice/common/nrf_sdh_soc.c \

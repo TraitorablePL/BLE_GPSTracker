@@ -11905,6 +11905,13 @@
 #define CONTROL_SERVICE_OBSERVER_PRIO 2
 #endif
 
+// <o> DATA_SERVICE_OBSERVER_PRIO  
+// <i> Priority with which BLE events are dispatched to the Data Service
+
+#ifndef DATA_SERVICE_OBSERVER_PRIO
+#define DATA_SERVICE_OBSERVER_PRIO 2
+#endif
+
 // </h> 
 //==========================================================
 
