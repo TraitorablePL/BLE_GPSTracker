@@ -56,7 +56,6 @@ SRC_FILES += \
   components/libraries/experimental_section_vars/nrf_section_iter.c \
   components/libraries/sortlist/nrf_sortlist.c \
   components/libraries/strerror/nrf_strerror.c \
-  components/libraries/sensorsim/sensorsim.c \
   components/libraries/log/src/nrf_log_backend_rtt.c \
   components/libraries/log/src/nrf_log_backend_serial.c \
   components/libraries/log/src/nrf_log_backend_uart.c \
@@ -117,9 +116,7 @@ SRC_FILES += \
   components/libraries/crypto/backend/cc310/cc310_backend_rng.c \
   components/libraries/crypto/backend/cc310/cc310_backend_shared.c \
   external/utf_converter/utf.c \
-  components/ble/ble_services/ble_bas/ble_bas.c \
   components/ble/ble_services/ble_dis/ble_dis.c \
-  components/ble/ble_services/ble_hrs/ble_hrs.c \
   external/segger_rtt/SEGGER_RTT.c \
   external/segger_rtt/SEGGER_RTT_Syscalls_GCC.c \
   external/segger_rtt/SEGGER_RTT_printf.c \
@@ -138,8 +135,6 @@ INC_FOLDERS += \
   components/nfc/ndef/generic/message \
   components/nfc/t2t_lib \
   components/nfc/t4t_parser/hl_detection_procedure \
-  components/ble/ble_services/ble_ancs_c \
-  components/ble/ble_services/ble_ias_c \
   components/libraries/pwm \
   external/nrf_oberon/include \
   components/libraries/usbd/class/cdc/acm \
@@ -149,7 +144,6 @@ INC_FOLDERS += \
   modules/nrfx/hal \
   components/nfc/ndef/conn_hand_parser/le_oob_rec_parser \
   components/libraries/log \
-  components/ble/ble_services/ble_gls \
   components/libraries/fstorage \
   components/nfc/ndef/text \
   components/libraries/mutex \
@@ -161,11 +155,9 @@ INC_FOLDERS += \
   components/nfc/t4t_parser/cc_file \
   components/ble/ble_advertising \
   external/utf_converter \
-  components/ble/ble_services/ble_bas_c \
   components/libraries/crypto/backend/micro_ecc \
   modules/nrfx/drivers/include \
   components/libraries/experimental_task_manager \
-  components/ble/ble_services/ble_hrs_c \
   components/softdevice/s140/headers/nrf52 \
   components/nfc/ndef/connection_handover/le_oob_rec \
   components/libraries/crypto/backend/oberon \
@@ -173,29 +165,21 @@ INC_FOLDERS += \
   components/libraries/pwr_mgmt \
   components/ble/ble_dtm \
   components/toolchain/cmsis/include \
-  components/ble/ble_services/ble_rscs_c \
   components/ble/common \
-  components/ble/ble_services/ble_lls \
   components/nfc/platform \
   components/libraries/bsp \
   components/libraries/crypto/backend/nrf_hw \
   components/nfc/ndef/connection_handover/ac_rec \
-  components/ble/ble_services/ble_bas \
   components/libraries/mpu \
   components/libraries/experimental_section_vars \
-  components/ble/ble_services/ble_ans_c \
   components/libraries/slip \
   components/libraries/delay \
   components/libraries/usbd/class/cdc \
   components/libraries/memobj \
   components/libraries/crypto/backend/cc310_bl \
-  components/ble/ble_services/ble_nus_c \
   components/softdevice/common \
-  components/ble/ble_services/ble_ias \
-  components/libraries/usbd/class/hid/mouse \
   components/libraries/low_power_pwm \
   components/nfc/ndef/conn_hand_parser/ble_oob_advdata_parser \
-  components/ble/ble_services/ble_dfu \
   external/fprintf \
   components/libraries/svc \
   components/libraries/atomic \
@@ -203,8 +187,6 @@ INC_FOLDERS += \
   external/nrf_cc310/include \
   components/libraries/scheduler \
   components/libraries/cli \
-  components/ble/ble_services/ble_lbs \
-  components/ble/ble_services/ble_hts \
   components/libraries/crc16 \
   components/nfc/t4t_parser/apdu \
   components/libraries/util \
@@ -214,9 +196,7 @@ INC_FOLDERS += \
   components/libraries/balloc \
   components/libraries/ecc \
   components/libraries/hardfault \
-  components/ble/ble_services/ble_cscs \
   components/libraries/hci \
-  components/libraries/usbd/class/hid/kbd \
   components/libraries/timer \
   components/softdevice/s140/headers \
   integration/nrfx \
@@ -226,29 +206,21 @@ INC_FOLDERS += \
   components/libraries/spi_mngr \
   components/libraries/led_softblink \
   components/nfc/ndef/conn_hand_parser \
-  components/libraries/sdcard \
   components/nfc/t4t_lib \
   components/nfc/ndef/parser/record \
   modules/nrfx/mdk \
-  components/ble/ble_services/ble_cts_c \
   external/nrf_tls/mbedtls/nrf_crypto/config \
-  components/ble/ble_services/ble_nus \
   components/libraries/twi_mngr \
-  components/ble/ble_services/ble_hids \
   components/libraries/strerror \
   components/libraries/crc32 \
   components/nfc/ndef/connection_handover/ble_oob_advdata \
   components/nfc/t2t_parser \
   components/nfc/ndef/connection_handover/ble_pair_msg \
   components/libraries/crypto/backend/optiga \
-  components/libraries/usbd/class/audio \
-  components/libraries/sensorsim \
   components/libraries/crypto/backend/nrf_sw \
   components/ble/peer_manager \
   components/libraries/mem_manager \
   components/libraries/ringbuf \
-  components/ble/ble_services/ble_tps \
-  components/ble/ble_services/ble_rscs \
   components/nfc/ndef/parser/message \
   components/libraries/crypto/backend/mbedtls \
   components/libraries/crypto/backend/cc310 \
@@ -267,14 +239,12 @@ INC_FOLDERS += \
   components/nfc/ndef/connection_handover/ep_oob_rec \
   external/segger_rtt \
   components/libraries/atomic_fifo \
-  components/ble/ble_services/ble_lbs_c \
   components/nfc/ndef/connection_handover/ble_pair_lib \
   components/libraries/crypto \
   components/ble/ble_racp \
   components/libraries/fds \
   components/nfc/ndef/launchapp \
   components/libraries/atomic_flags \
-  components/ble/ble_services/ble_hrs \
   components/libraries/crypto/backend/cifra \
   components/nfc/ndef/connection_handover/hs_rec \
   components/nfc/ndef/conn_hand_parser/ac_rec_parser \
