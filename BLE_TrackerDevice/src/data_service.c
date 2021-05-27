@@ -10,33 +10,33 @@
 static void toogle_index_notify(data_service_t * p_data_service) {
 	if(p_data_service->index_notification == INDEX_NOTIFICATION_DISABLED) {
 		p_data_service->index_notification = INDEX_NOTIFICATION_ENABLED;
-		NRF_LOG_INFO("Index notification enabled\r\n");
+		NRF_LOG_INFO("Index notification enabled");
 	}
 	else {
 		p_data_service->index_notification = INDEX_NOTIFICATION_DISABLED;
-		NRF_LOG_INFO("Index notification disabled\r\n");
+		NRF_LOG_INFO("Index notification disabled");
 	}
 }
 
 static void toogle_longitude_notify(data_service_t * p_data_service) {
 	if(p_data_service->longitude_notification == LONGITUDE_NOTIFICATION_DISABLED) {
 		p_data_service->longitude_notification = LONGITUDE_NOTIFICATION_ENABLED;
-		NRF_LOG_INFO("Longitude notification enabled\r\n");
+		NRF_LOG_INFO("Longitude notification enabled");
 	}
 	else {
 		p_data_service->longitude_notification = LONGITUDE_NOTIFICATION_DISABLED;
-		NRF_LOG_INFO("Longitude notification disabled\r\n");
+		NRF_LOG_INFO("Longitude notification disabled");
 	}
 }
 
 static void toogle_latitude_notify(data_service_t * p_data_service) {
 	if(p_data_service->latitude_notification == LATITUDE_NOTIFICATION_DISABLED) {
 		p_data_service->latitude_notification = LATITUDE_NOTIFICATION_ENABLED;
-		NRF_LOG_INFO("Latitude notification enabled\r\n");
+		NRF_LOG_INFO("Latitude notification enabled");
 	}
 	else {
 		p_data_service->latitude_notification = LATITUDE_NOTIFICATION_DISABLED;
-		NRF_LOG_INFO("Latitude notification disabled\r\n");
+		NRF_LOG_INFO("Latitude notification disabled");
 	}
 }
 
