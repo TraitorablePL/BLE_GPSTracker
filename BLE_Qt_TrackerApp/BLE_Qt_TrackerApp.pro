@@ -2,6 +2,8 @@ QT += quick
 QT += positioning
 QT += widgets
 QT += quickwidgets
+QT += widgets
+
 
 CONFIG += c++11
 CONFIG += qmltypes
@@ -16,6 +18,9 @@ SOURCES += \
 
 RESOURCES += qml.qrc
 
+OTHER_FILES +=Main.qml
+            MapViewer.qml
+            Bluetooth.qml
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -34,4 +39,12 @@ HEADERS += \
     coordinateparser.h \
     markermodel.h
 
-DISTFILES +=
+DISTFILES += \
+    Bluetooth.qml \
+    ContactPage.qml \
+    ConversationPage.qml \
+    Main.qml \
+    MapViewer.qml
+
+#FORMS += \
+#    mainwindow.ui

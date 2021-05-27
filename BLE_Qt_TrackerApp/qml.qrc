@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Bluetooth.qml</file>
+        <file>MapViewer.qml</file>
     </qresource>
 </RCC>

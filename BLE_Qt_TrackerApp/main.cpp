@@ -1,10 +1,14 @@
 #include "markermodel.h"
 #include "coordinateparser.h"
 
+#include <QQmlApplicationEngine>
 #include <QApplication>
 #include <QQuickWidget>
 #include <QQmlContext>
 #include <iostream>
+#include <QMenuBar>
+#include <QTabWidget>
+
 
 int main(int argc, char *argv[])
 {

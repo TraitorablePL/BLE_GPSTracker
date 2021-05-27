@@ -1,12 +1,13 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import QtLocation 5.6
 import QtPositioning 5.6
 import QtQuick.Window 2.0
+import QtQuick.Controls 2.15
+import QtQml 2.15
+import "."
 
-Rectangle {
-    width: Screen.width
-    height: Screen.height
-    visible: true
+Page {
+    id: mapPage
 
     Plugin {
         id: mapPlugin
@@ -39,5 +40,15 @@ Rectangle {
                 source: "http://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png"
             }
         }
+     }
+
+    Button {
+        id: btButton
+        x: 0
+        y: 0
+        text: qsTr("BT")
+        font.family: "Tahoma"
+        font.pointSize: 20
+        onClicked: mapPage.StackView.view.push("qrc:/Bluetooth.qml")
     }
 }
