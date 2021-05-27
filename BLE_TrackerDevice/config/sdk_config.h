@@ -11480,7 +11480,7 @@
 
 // <o> NRF_SDH_BLE_VS_UUID_COUNT - The number of vendor-specific UUIDs. 
 #ifndef NRF_SDH_BLE_VS_UUID_COUNT
-#define NRF_SDH_BLE_VS_UUID_COUNT 0
+#define NRF_SDH_BLE_VS_UUID_COUNT 2
 #endif
 
 // <q> NRF_SDH_BLE_SERVICE_CHANGED  - Include the Service Changed characteristic in the Attribute Table.
@@ -11618,6 +11618,7 @@
 #ifndef BLE_HRS_BLE_OBSERVER_PRIO
 #define BLE_HRS_BLE_OBSERVER_PRIO 2
 #endif
+
 
 // <o> BLE_HRS_C_BLE_OBSERVER_PRIO  
 // <i> Priority with which BLE events are dispatched to the Heart Rate Service Client.
@@ -11895,6 +11896,20 @@
 // <o> PM_BLE_OBSERVER_PRIO - Priority with which BLE events are dispatched to the Peer Manager module. 
 #ifndef PM_BLE_OBSERVER_PRIO
 #define PM_BLE_OBSERVER_PRIO 1
+#endif
+
+// <o> CONTROL_SERVICE_OBSERVER_PRIO  
+// <i> Priority with which BLE events are dispatched to the Control Service
+
+#ifndef CONTROL_SERVICE_OBSERVER_PRIO
+#define CONTROL_SERVICE_OBSERVER_PRIO 2
+#endif
+
+// <o> DATA_SERVICE_OBSERVER_PRIO  
+// <i> Priority with which BLE events are dispatched to the Data Service
+
+#ifndef DATA_SERVICE_OBSERVER_PRIO
+#define DATA_SERVICE_OBSERVER_PRIO 2
 #endif
 
 // </h> 
