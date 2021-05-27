@@ -65,6 +65,8 @@
 
 #define DEAD_BEEF                           0xDEADBEEF                              /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
+#define GPS_DATA_INTERVAL                   APP_TIMER_TICKS(1000)
+
 CONTROL_SERVICE_DEF(m_control_service);                             /**< Structure used to identify the control service. */
 DATA_SERVICE_DEF(m_data_service);                                   /**< Structure used to identify the data service. */
 
@@ -72,7 +74,17 @@ NRF_BLE_GATT_DEF(m_gatt);                                           /**< GATT mo
 NRF_BLE_QWR_DEF(m_qwr);                                             /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);                                 /**< Advertising module instance. */
 
-static uint16_t m_conn_handle         = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
+APP_TIMER_DEF(m_gps_timer_id);
+
+typedef struct {
+    uint16_t index;
+    float longitude;
+    float latitude;
+} gps_data_t;
+
+static uint16_t m_conn_handle           = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
+
+static gps_data_t m_gps_data            = {0,0,0};
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -147,11 +159,18 @@ static void pm_evt_handler(pm_evt_t const * p_evt) {
  *                       app_start_timer() call to the timeout handler.
  */
 
-// static void battery_level_meas_timeout_handler(void * p_context) {
+static void gps_data_timeout_handler(void * p_context) {
+    
+    UNUSED_PARAMETER(p_context);
 
-//     UNUSED_PARAMETER(p_context);
-//     battery_level_update();
-// }
+    index_characteristic_notify(&m_data_service, &m_gps_data.index);
+    longitude_characteristic_notify(&m_data_service, &m_gps_data.longitude);
+    latitude_characteristic_notify(&m_data_service, &m_gps_data.latitude);
+
+    m_gps_data.index++;
+    m_gps_data.latitude+= 0.125;
+    m_gps_data.longitude-= 0.125;
+}
 
 /**@brief Function for the Timer initialization.
  *
@@ -166,10 +185,10 @@ static void timers_init(void) {
     APP_ERROR_CHECK(err_code);
 
     // Create timers.
-    // err_code = app_timer_create(&m_battery_timer_id,
-    //                             APP_TIMER_MODE_REPEATED,
-    //                             battery_level_meas_timeout_handler);
-    // APP_ERROR_CHECK(err_code);
+    err_code = app_timer_create(&m_gps_timer_id,
+                                APP_TIMER_MODE_REPEATED,
+                                gps_data_timeout_handler);
+    APP_ERROR_CHECK(err_code);
 }
 
 
@@ -276,8 +295,8 @@ static void application_timers_start(void) {
     ret_code_t err_code;
 
     // Start application timers.
-    // err_code = app_timer_start(m_battery_timer_id, BATTERY_LEVEL_MEAS_INTERVAL, NULL);
-    // APP_ERROR_CHECK(err_code);
+    err_code = app_timer_start(m_gps_timer_id, GPS_DATA_INTERVAL, NULL);
+    APP_ERROR_CHECK(err_code);
 }
 
 /**@brief Function for handling the Connection Parameters Module.
