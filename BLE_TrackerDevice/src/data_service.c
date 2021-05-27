@@ -120,7 +120,6 @@ void data_service_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context) {
 
         case BLE_GAP_EVT_CONNECTED:
 			p_data_service->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-			NRF_LOG_INFO("BLE Tracker Connected\r\n");
 			break;
 			
 		case BLE_GAP_EVT_DISCONNECTED:
@@ -128,13 +127,12 @@ void data_service_on_ble_evt(ble_evt_t const * p_ble_evt, void * p_context) {
             p_data_service->longitude_notification = LONGITUDE_NOTIFICATION_DISABLED;
             p_data_service->latitude_notification = LATITUDE_NOTIFICATION_DISABLED;
             p_data_service->conn_handle = BLE_CONN_HANDLE_INVALID;
-			NRF_LOG_INFO("BLE Tracker Disconnected\r\n");
 			break;
 
         case BLE_GATTS_EVT_WRITE:
+            NRF_LOG_INFO("Characteristic write event");
             on_write(p_data_service, p_ble_evt);
             break;
-
         default:
             // No implementation needed.
             break;
@@ -277,8 +275,6 @@ ret_code_t data_service_init(data_service_t* p_data_service) {
 
     ble_uuid.type = p_data_service->uuid_type;
     ble_uuid.uuid = DATA_SERVICE;
-
-    NRF_LOG_INFO("Data service");
 
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_data_service->service_handle);
     VERIFY_SUCCESS(err_code);

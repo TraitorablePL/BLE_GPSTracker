@@ -146,8 +146,6 @@ ret_code_t control_service_init(control_service_t* p_control_service) {
     ble_uuid.type = p_control_service->uuid_type;
     ble_uuid.uuid = CONTROL_SERVICE;
 
-    NRF_LOG_INFO("Control service ");
-
     err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY, &ble_uuid, &p_control_service->service_handle);
     VERIFY_SUCCESS(err_code);
 

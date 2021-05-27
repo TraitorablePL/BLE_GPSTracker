@@ -282,10 +282,11 @@ static void services_init(void) {
 
     err_code = control_service_init(&m_control_service);
     APP_ERROR_CHECK(err_code);
+    NRF_LOG_INFO("Control Service initialization complete");
 
     err_code = data_service_init(&m_data_service);
     APP_ERROR_CHECK(err_code);
-    
+    NRF_LOG_INFO("Data Service initialization complete");
 }
 
 /**@brief Function for starting application timers.
@@ -668,7 +669,7 @@ int main(void) {
     peer_manager_init();
 
     // Start execution.
-    NRF_LOG_INFO("Heart Rate Sensor example started.");
+    NRF_LOG_INFO("BLE Tracker started.");
     application_timers_start();
     advertising_start(erase_bonds);
 
