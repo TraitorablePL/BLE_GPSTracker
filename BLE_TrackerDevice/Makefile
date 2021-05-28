@@ -10,6 +10,7 @@ SRC_FILES += \
   main.c \
   src/control_service.c \
   src/data_service.c \
+  src/flash_storage.c \
   modules/nrfx/mdk/gcc_startup_nrf52840.S \
   components/libraries/bsp/bsp.c \
   components/libraries/bsp/bsp_btn_ble.c \
@@ -131,7 +132,6 @@ SRC_FILES += \
 # Include folders common to all targets
 INC_FOLDERS += \
   include \
-  src \
   components/nfc/ndef/generic/message \
   components/nfc/t2t_lib \
   components/nfc/t4t_parser/hl_detection_procedure \
