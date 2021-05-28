@@ -3,7 +3,9 @@ QT += positioning
 QT += widgets
 QT += quickwidgets
 QT += widgets
-
+QT += bluetooth
+QT += qml
+QT += quickcontrols2
 
 CONFIG += c++11
 CONFIG += qmltypes
@@ -14,13 +16,27 @@ CONFIG += qmltypes
 
 SOURCES += \
         coordinateparser.cpp \
-        main.cpp
+        main.cpp \
+        characteristicinfo.cpp \
+        device.cpp \
+        deviceinfo.cpp \
+        serviceinfo.cpp
 
 RESOURCES += qml.qrc
 
 OTHER_FILES +=Main.qml
             MapViewer.qml
             Bluetooth.qml
+            Characteristics.qml
+            ContactPage.qml
+            ConversationPage.qml
+            Dialog.qml
+            Header.qml
+            Label.qml
+            MapViewer.qml
+            Menu.qml
+            Services.qml
+
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -37,14 +53,21 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     coordinateparser.h \
-    markermodel.h
+    markermodel.h \
+    characteristicinfo.h \
+    device.h \
+    deviceinfo.h \
+    serviceinfo.h
 
 DISTFILES += \
     Bluetooth.qml \
+    Characteristics.qml \
     ContactPage.qml \
     ConversationPage.qml \
+    Dialog.qml \
+    Header.qml \
+    Label.qml \
     Main.qml \
-    MapViewer.qml
-
-#FORMS += \
-#    mainwindow.ui
+    MapViewer.qml \
+    Menu.qml \
+    Services.qml

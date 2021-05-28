@@ -5,7 +5,7 @@ import QtQuick.Window 2.0
 import QtQuick.Controls 2.15
 import "."
 
-ApplicationWindow {
+Window {
     id: appWindow
 
     title: qsTr("TrackerApp GPS")
@@ -17,12 +17,5 @@ ApplicationWindow {
         id: stackView
         anchors.fill: parent
         initialItem: Bluetooth {}
-//            initialItem: MapViewer {}
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.5}
-}
-##^##*/

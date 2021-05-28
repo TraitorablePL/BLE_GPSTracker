@@ -3,5 +3,21 @@
         <file>main.qml</file>
         <file>Bluetooth.qml</file>
         <file>MapViewer.qml</file>
+        <file>Characteristics.qml</file>
+        <file>Dialog.qml</file>
+        <file>Header.qml</file>
+        <file>Label.qml</file>
+        <file>Menu.qml</file>
+        <file>Services.qml</file>
+        <file>busy_dark.png</file>
+        <file>characteristicinfo.h</file>
+        <file>device.h</file>
+        <file>deviceinfo.h</file>
+        <file>markermodel.h</file>
+        <file>serviceinfo.h</file>
+        <file>characteristicinfo.cpp</file>
+        <file>device.cpp</file>
+        <file>deviceinfo.cpp</file>
+        <file>serviceinfo.cpp</file>
     </qresource>
 </RCC>

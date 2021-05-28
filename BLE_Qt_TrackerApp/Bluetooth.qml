@@ -1,121 +1,129 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-Page {
+Rectangle {
     id: btPage
-    Column {
-        id: column
-        x: 0
-        y: 0
-        width: 200
-        height: 600
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.topMargin: 454
+    width: 300
+    height: 600
+    property bool deviceState: device.state
+    onDeviceStateChanged: {
+        if (!device.state)
+            info.visible = false;
+    }
 
-        Button {
-            id: buttonStart
-            y: 800
-            width: 200
-            text: qsTr("Start")
-            font.family: "Tahoma"
-            font.pointSize: 20
+    Button {
+        id: button
+        text: qsTr("Map")
+        font.family: "Tahoma"
+        font.pointSize: 20
+        onClicked: btPage.StackView.view.push("qrc:/MapViewer.qml")
+
+        background: Rectangle {
+            implicitWidth: 100
+            implicitHeight: 40
+            color: button.down ? "#d6d6d6" : "#f6f6f6"
+            border.color: "#26282a"
+            border.width: 1
+            radius: 4
         }
     }
 
-    Column {
-        id: column1
-        x: 200
-        y: 0
-        width: 200
-        height: 600
-        anchors.top: parent.top
-        anchors.topMargin: 454
+//    Header {
+//        id: header
+//        anchors.top: parent.top
+//        headerText: "Start Discovery"
+//    }
 
-        Button {
-            id: buttonStop
-            y:800
-            width: 200
-            text: qsTr("Stop")
-            font.family: "Tahoma"
-            font.pointSize: 20
+    Dialog {
+        id: info
+        anchors.centerIn: parent
+        visible: false
+    }
+
+    ListView {
+        id: theListView
+        width: parent.width
+        clip: true
+
+        anchors.top: header.bottom
+        anchors.bottom: connectToggle.top
+        model: device.devicesList
+
+        delegate: Rectangle {
+            id: box
+            height:100
+            width: parent.width
+            color: "lightsteelblue"
+            border.width: 2
+            border.color: "black"
+            radius: 5
+
+            Component.onCompleted: {
+                info.visible = false;
+                header.headerText = "Select a device";
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    device.scanServices(modelData.deviceAddress);
+                    pageLoader.source = "Services.qml"
+                }
+            }
+
+            Label {
+                id: deviceName
+                textContent: modelData.deviceName
+                anchors.top: parent.top
+                anchors.topMargin: 5
+            }
+
+            Label {
+                id: deviceAddress
+                textContent: modelData.deviceAddress
+                font.pointSize: deviceName.font.pointSize*0.7
+                anchors.bottom: box.bottom
+                anchors.bottomMargin: 5
+            }
         }
     }
 
-    Column {
-        id: column3
-        x: 400
-        y: 8
-        width: 200
-        height: 1046
-        anchors.top: parent.top
-        anchors.bottom: column.bottom
-        anchors.topMargin: 8
+    Menu {
+        id: connectToggle
+
+        menuWidth: parent.width
+        anchors.bottom: menu.top
+        menuText: { if (device.devicesList.length)
+                        visible = true
+                    else
+                        visible = false
+                    if (device.useRandomAddress)
+                        "Address type: Random"
+                    else
+                        "Address type: Public"
+        }
+
+        onButtonClick: device.useRandomAddress = !device.useRandomAddress;
     }
 
-    Column {
-        id: column2
-        x: 226
-        y: 53
-        width: 572
-        height: 1040
-        anchors.right: parent.right
-        anchors.top: parent.top
+    Menu {
+        id: menu
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.rightMargin: 0
-        anchors.topMargin: 0
-    }
-
-    Column {
-        id: column4
-        x: 598
-        y: 8
-        width: 200
-        height: 1046
-        anchors.top: parent.top
-        anchors.bottom: column.bottom
-        anchors.topMargin: 454
-
-        Button {
-            id: buttonReset
-            width: 200
-            text: qsTr("Reset")
-            font.family: "Tahoma"
-            font.pointSize: 20
-        }
-
-        Button {
-            id: buttonDownload
-            width: 200
-            text: qsTr("Download")
-            font.family: "Tahoma"
-            font.pointSize: 20
+        menuWidth: parent.width
+        menuHeight: (parent.height/6)
+        menuText: device.update
+        onButtonClick: {
+            device.startDeviceDiscovery();
+            // if startDeviceDiscovery() failed device.state is not set
+            if (device.state) {
+                info.dialogText = "Searching...";
+                info.visible = true;
+            }
         }
     }
 
-    Column {
-        id: column5
-        x: 0
-        y: 0
-        width: 200
-        height: 400
-
-        Button {
-            id: button
-            text: qsTr("Map")
-            font.family: "Tahoma"
-            font.pointSize: 20
-            onClicked: btPage.StackView.view.push("qrc:/MapViewer.qml")
-        }
+    Loader {
+        id: pageLoader
+        anchors.fill: parent
     }
-
-
-
 }
-
-/*##^##
-Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.25;height:1040;width:1920}
-}
-##^##*/
