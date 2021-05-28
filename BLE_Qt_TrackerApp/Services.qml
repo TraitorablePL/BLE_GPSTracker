@@ -52,7 +52,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 300
+    width: 800
     height: 600
 
     Component.onCompleted: {
@@ -94,7 +94,8 @@ Rectangle {
 
     ListView {
         id: servicesview
-        width: parent.width
+//        width: parent.width
+        width: 250
         anchors.top: header.bottom
         anchors.bottom: menu.top
         model: device.servicesList
@@ -107,7 +108,8 @@ Rectangle {
             border.width: 2
             border.color: "black"
             radius: 5
-            width: parent.width
+//            width: parent.width
+            width: 250
             Component.onCompleted: {
                 info.visible = false
             }
@@ -146,7 +148,8 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-        menuWidth: parent.width
+//        menuWidth: parent.width
+        width: 250
         menuText: device.update
         menuHeight: (parent.height/6)
         onButtonClick: {

@@ -52,7 +52,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 300
+    width: 800
     height: 600
 
     Header {
@@ -88,7 +88,8 @@ Rectangle {
 
     ListView {
         id: characteristicview
-        width: parent.width
+//        width: parent.width
+        width: 250
         clip: true
 
         anchors.top: header.bottom
@@ -98,7 +99,8 @@ Rectangle {
         delegate: Rectangle {
             id: characteristicbox
             height:300
-            width: parent.width
+//            width: parent.width
+            width: 250
             color: "lightsteelblue"
             border.width: 2
             border.color: "black"
@@ -150,9 +152,11 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-        menuWidth: parent.width
+//        menuWidth: parent.width
+        menuWidth: 250
         menuText: device.update
-        menuHeight: (parent.height/6)
+//        menuHeight: (parent.height/6)
+        menuHeight: 80
         onButtonClick: {
             pageLoader.source = "Services.qml"
             device.update = "Back"

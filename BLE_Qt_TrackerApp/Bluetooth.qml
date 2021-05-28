@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 
 Rectangle {
     id: btPage
-    width: 300
+    width: 800
     height: 600
     property bool deviceState: device.state
     onDeviceStateChanged: {
@@ -16,11 +16,15 @@ Rectangle {
         text: qsTr("Map")
         font.family: "Tahoma"
         font.pointSize: 20
+        anchors.right: parent.right
+        anchors.top: parent.top
         onClicked: btPage.StackView.view.push("qrc:/MapViewer.qml")
 
         background: Rectangle {
             implicitWidth: 100
             implicitHeight: 40
+            anchors.right: parent.right
+            anchors.top: parent.top
             color: button.down ? "#d6d6d6" : "#f6f6f6"
             border.color: "#26282a"
             border.width: 1
@@ -28,11 +32,11 @@ Rectangle {
         }
     }
 
-//    Header {
-//        id: header
-//        anchors.top: parent.top
-//        headerText: "Start Discovery"
-//    }
+    Header {
+        id: header
+        anchors.top: parent.top
+        headerText: "Start Discovery"
+    }
 
     Dialog {
         id: info
@@ -42,7 +46,8 @@ Rectangle {
 
     ListView {
         id: theListView
-        width: parent.width
+//        width: parent.width
+        width: 250
         clip: true
 
         anchors.top: header.bottom
@@ -52,7 +57,8 @@ Rectangle {
         delegate: Rectangle {
             id: box
             height:100
-            width: parent.width
+//            width: parent.width
+            width: 250
             color: "lightsteelblue"
             border.width: 2
             border.color: "black"
@@ -91,7 +97,8 @@ Rectangle {
     Menu {
         id: connectToggle
 
-        menuWidth: parent.width
+//        menuWidth: parent.width
+        menuWidth: 250
         anchors.bottom: menu.top
         menuText: { if (device.devicesList.length)
                         visible = true
@@ -109,8 +116,10 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-        menuWidth: parent.width
-        menuHeight: (parent.height/6)
+//        menuWidth: parent.width
+        menuWidth: 250
+//        menuHeight: parent.height
+        menuHeight: 80
         menuText: device.update
         onButtonClick: {
             device.startDeviceDiscovery();

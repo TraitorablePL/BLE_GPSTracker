@@ -9,9 +9,15 @@ Window {
     id: appWindow
 
     title: qsTr("TrackerApp GPS")
-    height: Screen.height
-    width: Screen.width
+    height: 600
+    width: 800
     visible: true
+
+    maximumHeight: 600
+    maximumWidth: 800
+
+    minimumHeight: 600
+    minimumWidth: 800
 
     StackView {
         id: stackView

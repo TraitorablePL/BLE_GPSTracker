@@ -57,7 +57,8 @@ Text {
     color: "#363636"
     horizontalAlignment: Text.AlignHCenter
     elide: Text.ElideMiddle
-    width: parent.width
+//    width: parent.width
+    width: 250
     wrapMode: Text.Wrap
     text: textContent
 }
