@@ -52,8 +52,9 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 800
-    height: 600
+
+    width: parent.width
+    height: parent.height
 
     Component.onCompleted: {
         // Loading this page may take longer than QLEController
@@ -149,8 +150,7 @@ Rectangle {
         anchors.bottom: parent.bottom
         width: 250
         menuText: device.update
-//        menuHeight: (parent.height/6)
-        menuHeight: 40
+        menuHeight: 45
         onButtonClick: {
             device.disconnectFromDevice()
             pageLoader.source = "Bluetooth.qml"

@@ -52,8 +52,9 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: 800
-    height: 600
+
+        width: parent.width
+        height: parent.height
 
     Header {
         id: header

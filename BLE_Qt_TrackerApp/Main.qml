@@ -14,9 +14,8 @@ Window {
     visible: true
 
     maximumHeight: 600
-    maximumWidth: 800
-
     minimumHeight: 600
+    maximumWidth: 800
     minimumWidth: 800
 
     StackView {

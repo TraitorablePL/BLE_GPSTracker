@@ -3,8 +3,9 @@ import QtQuick.Controls 2.15
 
 Rectangle {
     id: btPage
-    width: 800
-    height: 600
+
+        width: parent.width
+        height: parent.height
     property bool deviceState: device.state
     onDeviceStateChanged: {
         if (!device.state)
@@ -19,7 +20,7 @@ Rectangle {
 
         background: Rectangle {
             implicitWidth: 100
-            implicitHeight: 40
+            implicitHeight: 45
             anchors.right: parent.right
             anchors.top: parent.top
             color: "#363636"
@@ -140,9 +141,11 @@ Rectangle {
 
     Menu {
         id: menu
-        anchors.bottom: parent.bottom
+        anchors.bottom: buttonDownRec.top
+        anchors.left: buttonDownRec.left
+//        anchors.bottom: parent.bottom
+//        anchors.left: parent.left
         width: 250
-        height: 80
         menuText: device.update
         onButtonClick: {
             device.startDeviceDiscovery();
@@ -158,4 +161,200 @@ Rectangle {
         id: pageLoader
         anchors.fill: parent
     }
+
+    Button {
+        id: buttonStart
+        text: qsTr("Start")
+        anchors.left: parent.left
+        anchors.bottom: menu.top
+
+        background: Rectangle {
+            implicitWidth: 125
+            implicitHeight: 45
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            color: "#363636"
+            border.width: 1
+            border.color: "#E3E3E3"
+            radius: 5
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    buttonStart.width = buttonStart.width - 7
+                    buttonStart.height = buttonStart.height - 5
+                }
+
+                onReleased: {
+                    buttonStart.width = buttonStart.width + 7
+                    buttonStart.height = buttonStart.height + 5
+                }
+//                onClicked: {
+//                    \\something
+//                }
+            }
+        }
+
+        contentItem: Text {
+           id: buttonStartText
+           horizontalAlignment: Text.AlignHCenter
+           verticalAlignment: Text.AlignVCenter
+           anchors.fill: parent
+           text: buttonStart.text
+           elide: Text.ElideMiddle
+           color: "#E3E3E3"
+           wrapMode: Text.WordWrap
+        }
+
+    }
+
+Button {
+    id: buttonStop
+    anchors.left: menu.horizontalCenter
+    anchors.bottom: menu.top
+    text: qsTr("Stop")
+
+    background: Rectangle {
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        implicitWidth: 125
+        implicitHeight: 45
+
+        color: "#363636"
+        border.width: 1
+        border.color: "#E3E3E3"
+        radius: 5
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+                buttonStop.width = buttonStop.width - 7
+                buttonStop.height = buttonStop.height - 5
+            }
+
+            onReleased: {
+                buttonStop.width = buttonStop.width + 7
+                buttonStop.height = buttonStop.height + 5
+            }
+//                onClicked: {
+//                    \\something
+//                }
+        }
+    }
+
+    contentItem: Text {
+       id: buttonStopText
+       horizontalAlignment: Text.AlignHCenter
+       verticalAlignment: Text.AlignVCenter
+       anchors.fill: parent
+       text: buttonStop.text
+       elide: Text.ElideMiddle
+       color: "#E3E3E3"
+       wrapMode: Text.WordWrap
+    }
+
+}
+
+    Rectangle{
+        id: buttonDownRec
+        width: 125
+        height: 45
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+
+        Button {
+            id: buttonDown
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            text: qsTr("Download")
+
+            background: Rectangle {
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+                implicitWidth: 125
+                implicitHeight: 45
+
+                color: "#363636"
+                border.width: 1
+                border.color: "#E3E3E3"
+                radius: 5
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        buttonDown.width = buttonDown.width - 7
+                        buttonDown.height = buttonDown.height - 5
+                    }
+
+                    onReleased: {
+                        buttonDown.width = buttonDown.width + 7
+                        buttonDown.height = buttonDown.height + 5
+                    }
+        //                onClicked: {
+        //                    \\something
+        //                }
+                }
+            }
+
+            contentItem: Text {
+               id: buttonDownText
+               horizontalAlignment: Text.AlignHCenter
+               verticalAlignment: Text.AlignVCenter
+               anchors.fill: parent
+               text: buttonDown.text
+               elide: Text.ElideMiddle
+               color: "#E3E3E3"
+               wrapMode: Text.WordWrap
+            }
+
+        }
+    }
+
+Button {
+    id: buttonRst
+    anchors.left: buttonDownRec.right
+    anchors.bottom: buttonDownRec.bottom
+    text: qsTr("Reset")
+
+
+    background: Rectangle {
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        implicitWidth: 125
+        implicitHeight: 45
+
+        color: "#363636"
+        border.width: 1
+        border.color: "#E3E3E3"
+        radius: 5
+
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+               buttonRst.width = buttonRst.width - 7
+                buttonRst.height = buttonRst.height - 5
+            }
+
+            onReleased: {
+               buttonRst.width = buttonRst.width + 7
+                buttonRst.height = buttonRst.height + 5
+            }
+//                onClicked: {
+//                    \\something
+//                }
+        }
+    }
+
+    contentItem: Text {
+       id: buttonRstText
+       horizontalAlignment: Text.AlignHCenter
+       verticalAlignment: Text.AlignVCenter
+       anchors.fill: parent
+       text: buttonRst.text
+       elide: Text.ElideMiddle
+       color: "#E3E3E3"
+       wrapMode: Text.WordWrap
+    }
+
+}
 }
