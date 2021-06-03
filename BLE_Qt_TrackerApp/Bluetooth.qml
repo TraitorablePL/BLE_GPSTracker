@@ -12,24 +12,49 @@ Rectangle {
     }
 
     Button {
-        id: button
+        id: buttonMap
         text: qsTr("Map")
-        font.family: "Tahoma"
-        font.pointSize: 20
         anchors.right: parent.right
         anchors.top: parent.top
-        onClicked: btPage.StackView.view.push("qrc:/MapViewer.qml")
 
         background: Rectangle {
             implicitWidth: 100
             implicitHeight: 40
             anchors.right: parent.right
             anchors.top: parent.top
-            color: button.down ? "#d6d6d6" : "#f6f6f6"
-            border.color: "#26282a"
+            color: "#363636"
             border.width: 1
-            radius: 4
+            border.color: "#E3E3E3"
+            radius: 5
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    buttonMap.width = buttonMap.width - 7
+                    buttonMap.height = buttonMap.height - 5
+                }
+
+                onReleased: {
+                    buttonMap.width = buttonMap.width + 7
+                    buttonMap.height = buttonMap.height + 5
+                }
+                onClicked: {
+                    btPage.StackView.view.push("qrc:/MapViewer.qml")
+                }
+            }
         }
+
+        contentItem: Text {
+           id: buttonMapText
+           horizontalAlignment: Text.AlignHCenter
+           verticalAlignment: Text.AlignVCenter
+           anchors.fill: parent
+           text: buttonMap.text
+           elide: Text.ElideMiddle
+           color: "#E3E3E3"
+           wrapMode: Text.WordWrap
+        }
+
     }
 
     Header {
@@ -40,13 +65,15 @@ Rectangle {
 
     Dialog {
         id: info
-        anchors.centerIn: parent
+        anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+        }
         visible: false
     }
 
     ListView {
         id: theListView
-//        width: parent.width
         width: 250
         clip: true
 
@@ -57,7 +84,6 @@ Rectangle {
         delegate: Rectangle {
             id: box
             height:100
-//            width: parent.width
             width: 250
             color: "lightsteelblue"
             border.width: 2
@@ -79,14 +105,14 @@ Rectangle {
 
             Label {
                 id: deviceName
-                textContent: modelData.deviceName
+                text: modelData.deviceName
                 anchors.top: parent.top
                 anchors.topMargin: 5
             }
 
             Label {
                 id: deviceAddress
-                textContent: modelData.deviceAddress
+                text: modelData.deviceAddress
                 font.pointSize: deviceName.font.pointSize*0.7
                 anchors.bottom: box.bottom
                 anchors.bottomMargin: 5
@@ -97,9 +123,8 @@ Rectangle {
     Menu {
         id: connectToggle
 
-//        menuWidth: parent.width
-        menuWidth: 250
-        anchors.bottom: menu.top
+        width: 250
+        anchors.top: menu.top
         menuText: { if (device.devicesList.length)
                         visible = true
                     else
@@ -116,10 +141,8 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-//        menuWidth: parent.width
-        menuWidth: 250
-//        menuHeight: parent.height
-        menuHeight: 80
+        width: 250
+        height: 80
         menuText: device.update
         onButtonClick: {
             device.startDeviceDiscovery();

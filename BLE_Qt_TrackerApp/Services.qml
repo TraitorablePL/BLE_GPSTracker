@@ -67,6 +67,7 @@ Rectangle {
 
     Header {
         id: header
+        height: 40
         anchors.top: parent.top
         headerText: "Services list"
     }
@@ -93,8 +94,7 @@ Rectangle {
     }
 
     ListView {
-        id: servicesview
-//        width: parent.width
+        id: servicesviewS
         width: 250
         anchors.top: header.bottom
         anchors.bottom: menu.top
@@ -108,7 +108,6 @@ Rectangle {
             border.width: 2
             border.color: "black"
             radius: 5
-//            width: parent.width
             width: 250
             Component.onCompleted: {
                 info.visible = false
@@ -148,10 +147,10 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-//        menuWidth: parent.width
         width: 250
         menuText: device.update
-        menuHeight: (parent.height/6)
+//        menuHeight: (parent.height/6)
+        menuHeight: 40
         onButtonClick: {
             device.disconnectFromDevice()
             pageLoader.source = "Bluetooth.qml"

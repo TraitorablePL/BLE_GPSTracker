@@ -62,10 +62,11 @@ Rectangle {
     width: menuWidth
 
     Rectangle {
+
         id: search
-        width: parent.width
-        height: parent.height
-        anchors.centerIn: parent
+        width: 250
+        height: 45
+        anchors.bottom: parent.bottom
         color: "#363636"
         border.width: 1
         border.color: "#E3E3E3"

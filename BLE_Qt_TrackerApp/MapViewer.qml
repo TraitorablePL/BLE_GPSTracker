@@ -43,21 +43,50 @@ Page {
      }
 
     Button {
-        id: btButton
-        x: 0
-        y: 0
+        id: buttonBT
         text: qsTr("BT")
-        font.family: "Tahoma"
-        font.pointSize: 20
-        onClicked: mapPage.StackView.view.push("qrc:/Bluetooth.qml")
+        anchors.right: parent.right
+        anchors.top: parent.top
 
         background: Rectangle {
             implicitWidth: 100
             implicitHeight: 40
-            color: button.down ? "#d6d6d6" : "#f6f6f6"
-            border.color: "#26282a"
+            anchors.right: parent.right
+            anchors.top: parent.top
+            color: "#E3E3E3"
             border.width: 1
-            radius: 4
+            border.color: "#363636"
+            radius: 5
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    buttonBT.width = buttonBT.width - 7
+                    buttonBT.height = buttonBT.height - 5
+                }
+
+                onReleased: {
+                    buttonBT.width = buttonBT.width + 7
+                    buttonBT.height = buttonBT.height + 5
+                }
+                onClicked: {
+                    mapPage.StackView.view.push("qrc:/Bluetooth.qml")
+                }
+            }
         }
+
+        contentItem: Text {
+           id: buttonBtText
+           horizontalAlignment: Text.AlignHCenter
+           verticalAlignment: Text.AlignVCenter
+           anchors.fill: parent
+           text: buttonBT.text
+           elide: Text.ElideMiddle
+           color: "#363636"
+           wrapMode: Text.WordWrap
+        }
+
     }
+
+
 }

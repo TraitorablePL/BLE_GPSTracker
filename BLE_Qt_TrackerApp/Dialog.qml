@@ -51,8 +51,9 @@
 import QtQuick 2.0
 
 Rectangle {
-    width: parent.width/3*2
+    width: 250
     height: dialogTextId.height + background.height + 20
+
     z: 50
     property string dialogText: ""
     property bool busyImage: true

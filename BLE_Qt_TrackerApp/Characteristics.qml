@@ -82,13 +82,12 @@ Rectangle {
         }
 
         onDisconnected: {
-            pageLoader.source = "main.qml"
+            pageLoader.source = "Bluetooth.qml"
         }
     }
 
     ListView {
         id: characteristicview
-//        width: parent.width
         width: 250
         clip: true
 
@@ -99,7 +98,6 @@ Rectangle {
         delegate: Rectangle {
             id: characteristicbox
             height:300
-//            width: parent.width
             width: 250
             color: "lightsteelblue"
             border.width: 2
@@ -152,10 +150,8 @@ Rectangle {
     Menu {
         id: menu
         anchors.bottom: parent.bottom
-//        menuWidth: parent.width
         menuWidth: 250
         menuText: device.update
-//        menuHeight: (parent.height/6)
         menuHeight: 80
         onButtonClick: {
             pageLoader.source = "Services.qml"
