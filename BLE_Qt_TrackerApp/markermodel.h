@@ -56,8 +56,10 @@ public:
         return roles;
     }
 
+
 private:
     QList<QGeoCoordinate> m_coordinates;
+
 };
 
 #endif // MARKERMODEL_H

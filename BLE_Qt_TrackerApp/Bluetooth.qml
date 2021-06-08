@@ -41,6 +41,7 @@ Rectangle {
                 }
                 onClicked: {
                     btPage.StackView.view.push("qrc:/MapViewer.qml")
+//                    btPage.StackView.view.push("qrc:/TDT.qml")
                 }
             }
         }
@@ -357,4 +358,11 @@ Button {
     }
 
 }
+
+    CoordDisp {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+        }
+    }
 }

@@ -12,6 +12,7 @@ public:
     QGeoCoordinate ReadCoordsFromString(const QString &line);
     QList<QGeoCoordinate> getCoordList();
 
+
 private:
     QFile file;
     QList<QGeoCoordinate> coordinates_list;

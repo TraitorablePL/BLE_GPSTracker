@@ -19,5 +19,6 @@
         <file>device.cpp</file>
         <file>deviceinfo.cpp</file>
         <file>serviceinfo.cpp</file>
+        <file>CoordDisp.qml</file>
     </qresource>
 </RCC>

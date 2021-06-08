@@ -12,6 +12,8 @@
 #include <QQuickView>
 #include <iostream>
 #include <QMenuBar>
+#include <QQuickItem>
+
 
 
 int main(int argc, char *argv[])
@@ -28,8 +30,8 @@ int main(int argc, char *argv[])
     Device d;
     rootContext->setContextProperty("device", &d);
     rootContext->setContextProperty("markerModel", &model);
-    model.addMarker(ge);
 
+    model.addMarker(ge);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return QGuiApplication::exec();

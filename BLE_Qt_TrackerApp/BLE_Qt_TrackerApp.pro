@@ -64,6 +64,7 @@ DISTFILES += \
     Characteristics.qml \
     ContactPage.qml \
     ConversationPage.qml \
+    CoordDisp.qml \
     Dialog.qml \
     Header.qml \
     Label.qml \
