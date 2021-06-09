@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <string.h>
 #include "nordic_common.h"
 #include "nrf.h"
 #include "nrf_sdm.h"
@@ -25,9 +24,11 @@
 #include "nrf_ble_qwr.h"
 #include "ble_conn_state.h"
 #include "nrf_pwr_mgmt.h"
+
 #include "control_service.h"
 #include "data_service.h"
 #include "flash_storage.h"
+#include "gps.h"
 
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
@@ -672,11 +673,12 @@ int main(void) {
     peer_manager_init();
 
     init_flash_storage();
+    uart_init();
 
-    flash_storage_page_erase(0x44000);
-    flash_storage_write(&m_write_data, sizeof(m_write_data),0x44000);
-    flash_storage_read(&m_read_data, sizeof(m_read_data), 0x44000);
-    NRF_LOG_INFO("Data read: %x", m_read_data);
+    // flash_storage_page_erase(0x44000);
+    // flash_storage_write(&m_write_data, sizeof(m_write_data),0x44000);
+    // flash_storage_read(&m_read_data, sizeof(m_read_data), 0x44000);
+    // NRF_LOG_INFO("Data read: %x", m_read_data);
 
     // Start execution.
     NRF_LOG_INFO("BLE Tracker started.");
