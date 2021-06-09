@@ -11,6 +11,7 @@ SRC_FILES += \
   src/control_service.c \
   src/data_service.c \
   src/flash_storage.c \
+  src/gps.c \
   modules/nrfx/mdk/gcc_startup_nrf52840.S \
   components/libraries/bsp/bsp.c \
   components/libraries/bsp/bsp_btn_ble.c \
@@ -128,6 +129,8 @@ SRC_FILES += \
   components/libraries/crypto/backend/oberon/oberon_backend_eddsa.c \
   components/libraries/crypto/backend/oberon/oberon_backend_hash.c \
   components/libraries/crypto/backend/oberon/oberon_backend_hmac.c \
+  components/libraries/uart/app_uart_fifo.c \
+  components/libraries/fifo/app_fifo.c \
 
 # Include folders common to all targets
 INC_FOLDERS += \
@@ -250,6 +253,8 @@ INC_FOLDERS += \
   components/nfc/ndef/conn_hand_parser/ac_rec_parser \
   components/libraries/stack_guard \
   components/libraries/log/src \
+  components/libraries/uart \
+  components/libraries/fifo \
 
 # Libraries common to all targets
 LIB_FILES += \
