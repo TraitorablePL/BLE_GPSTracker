@@ -1,4 +1,5 @@
 #include "string.h"
+#include "stdlib.h"
 #include "gps.h"
 #include "app_uart.h"
 #include "flash_storage.h"
@@ -30,15 +31,57 @@ typedef struct {
     uint8_t seconds;
 } gps_data_t;
 
-// Converts degree, minutes, seconds value into decimal degree format
-uint8_t dms_to_dd_converter(){
+float latitude_conv(char* token_val, char* token_dir) {
+    
+    float decimal_degree, degree, minutes, seconds;
+    char buffer[20];
 
+    strncpy(buffer, token_val, 2);
+    buffer[2] = '\0';
+    degree = strtol(buffer, NULL, 10);
+
+    strncpy(buffer, token_val + 2, 2);
+    buffer[2] = '\0';
+    minutes = strtol(buffer, NULL, 10);
+
+    strncpy(buffer, token_val + 3, 4);
+    buffer[0] = '0';
+    seconds = 60*strtof(buffer, NULL);
+    
+    if(token_dir[0] = 'E')
+        return degree + minutes/60 + seconds/3600;
+    else
+        return (degree + minutes/60 + seconds/3600)*(-1);
+}
+
+float longitude_conv(char* token_val, char* token_dir) {
+    
+    float degree, minutes, seconds;
+    char buffer[20];
+
+    strncpy(buffer, token_val, 3);
+    buffer[3] = '\0';
+    degree = strtol(buffer, NULL, 10);
+
+    strncpy(buffer, token_val + 3, 2);
+    buffer[3] = '\0';
+    minutes = strtol(buffer, NULL, 10);
+
+    strncpy(buffer, token_val + 3, 4);
+    buffer[0] = '0';
+    seconds = (float)(60*strtof(buffer, NULL));
+    
+    if(token_dir[0] = 'N')
+        return degree + minutes/60 + seconds/3600;
+    else
+        return (degree + minutes/60 + seconds/3600)*(-1);
 }
 
 /* $GPRMC, Time (hhmmss.sss), Status (A - Valid, V - Invalid), Latitude, N/S, Longitude, W/E, don't care, don't care, Date (ddmmyy), don't care, don't care * Checksum \r\n */
 
 uint8_t gps_convert_output(uint8_t* str_in, gps_data_t* gps_data) {
 
+    gps_data_t received_data;
     char* p_tokens[13];
     const char delimiter[2] = ",";
     uint8_t index = 0;
@@ -46,18 +89,24 @@ uint8_t gps_convert_output(uint8_t* str_in, gps_data_t* gps_data) {
     p_tokens[index] = strtok(str_in, delimiter);
 
     while( p_tokens[index] != NULL ) {
-        if(index < 6){
-            NRF_LOG_INFO("%d. %s", index, p_tokens[index]);
+        if(index < 10){
+            //NRF_LOG_INFO("%d. %s", index, p_tokens[index]);
         }
         p_tokens[++index] = strtok(NULL, delimiter);
     }
 
     if(!strcmp(p_tokens[2], "A")) {
-        NRF_LOG_INFO("Valid GPS Data");
+        //NRF_LOG_INFO("Valid GPS Data");
     }
     else {
-        NRF_LOG_INFO("Invalid GPS Data");
+        //NRF_LOG_INFO("Invalid GPS Data");
     }
+
+    received_data.latitude = latitude_conv("5003.8517", "N");
+    received_data.longitude = longitude_conv("02001.3251", "E");
+
+    NRF_LOG_INFO("Latitude " NRF_LOG_FLOAT_MARKER, NRF_LOG_FLOAT(received_data.latitude));
+    NRF_LOG_INFO("Longitude " NRF_LOG_FLOAT_MARKER, NRF_LOG_FLOAT(received_data.longitude));
 
     return 0;
 }
