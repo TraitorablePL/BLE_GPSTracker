@@ -81,11 +81,11 @@ typedef struct {
     uint16_t index;
     float longitude;
     float latitude;
-} gps_data_t;
+} test_data_t;
 
 static uint16_t m_conn_handle           = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
 
-static gps_data_t m_gps_data            = {0,0,0};
+static test_data_t m_gps_data            = {0,0,0};
 
 /**@brief Callback function for asserts in the SoftDevice.
  *

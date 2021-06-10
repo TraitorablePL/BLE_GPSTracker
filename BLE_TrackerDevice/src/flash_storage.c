@@ -22,8 +22,8 @@ NRF_FSTORAGE_DEF(nrf_fstorage_t fstorage) = {
      * You must set these manually, even at runtime, before nrf_fstorage_init() is called.
      * The function nrf5_flash_end_addr_get() can be used to retrieve the last address on the
      * last page of flash available to write data. */
-    .start_addr = 0x44000,
-    .end_addr   = 0x47fff,
+    .start_addr = 0x50000,
+    .end_addr   = 0x60000,
 };
 
 static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt) {
@@ -110,13 +110,10 @@ void flash_storage_read(void* data, uint32_t data_size, uint32_t addr){
 void flash_storage_write(void const* data, uint32_t data_size, uint32_t addr){
     
     ret_code_t err;
-
-    NRF_LOG_INFO("Writing \"%x\" to flash.", *(uint32_t*)data);
     err = nrf_fstorage_write(&fstorage, addr, data, data_size, NULL);
     APP_ERROR_CHECK(err);
 
     wait_for_flash_ready(&fstorage);
-    NRF_LOG_INFO("Done.");
 }
 
 void flash_storage_page_erase(uint32_t addr){
